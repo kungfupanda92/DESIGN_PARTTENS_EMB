@@ -17,6 +17,7 @@ struct queue
 	int (*get_size)(queue_t *const me);
 	void (*insert)(queue_t *const me, int k);
 	int (*remove)(queue_t *const me);
+	void (*debug)(queue_t *const me);
 };
 
 /*constructors and destructors*/
@@ -25,7 +26,8 @@ void queue_init(queue_t *const me,
 	int (*fun_is_empty)(queue_t *const me),
 	int (*fun_get_size)(queue_t *const me),
 	void (*fun_insert)(queue_t *const me, int k),
-	int (*fun_remove)(queue_t *const me));
+	int (*fun_remove)(queue_t *const me),
+	void (*debug_queue)(queue_t *const me));
 
 void queue_cleanup(queue_t *const me);
 
@@ -35,6 +37,7 @@ int queue_is_empty(queue_t *const me);
 int queue_get_size(queue_t *const me);
 void queue_insert(queue_t *const me, int k);
 int queue_remove(queue_t *const me);
+void queue_debug(queue_t *const me);
 
 queue_t *queue_create(void);
 void queue_destroy(queue_t *const me);

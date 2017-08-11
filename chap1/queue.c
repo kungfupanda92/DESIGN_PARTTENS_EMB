@@ -20,7 +20,8 @@ void queue_init(queue_t *const me,
 	int (*fun_is_empty)(queue_t *const me),
 	int (*fun_get_size)(queue_t *const me),
 	void (*fun_insert)(queue_t *const me, int k),
-	int (*fun_remove)(queue_t *const me))
+	int (*fun_remove)(queue_t *const me),
+	void (*debug_queue)(queue_t *const me))
 {
 	me->head = 0;
 	me->tail = 0;
@@ -31,6 +32,7 @@ void queue_init(queue_t *const me,
 	me->get_size = fun_get_size;
 	me->insert = fun_insert;
 	me->remove = fun_remove;
+	me->debug = debug_queue;
 }
 void queue_cleanup(queue_t *const me)
 {
@@ -59,6 +61,8 @@ void queue_insert(queue_t *const me, int k)
 		me->head = (me->head+1) % QUEUE_SIZE;
 		++me->size;
 	}
+	else
+		printf("%s is full", __FUNCTION__);
 }
 int queue_remove(queue_t *const me)
 {
@@ -69,7 +73,39 @@ int queue_remove(queue_t *const me)
 		me->tail = (me->tail+1) % QUEUE_SIZE;
 		--me->size;
 	}
+	else
+		printf("%s is empty", __FUNCTION__);
 	return value;
+}
+void queue_debug(queue_t *const me)
+{
+	printf("-----------------------------------\n");
+	if(me->head > me->tail)
+	{
+		/*[---tail---------------head---]*/
+		for(int i = me->tail; i<me->head; ++i)
+		{
+			printf("buffer[%d] = %d\n", i, me->buffer[i]);
+		}	
+	}
+	else if (me->head < me->tail)
+	{
+		/*[---head---------------tail---]*/
+		int i_size = me->head - me->tail;
+		int index;
+		for(int i = me->tail; i<QUEUE_SIZE; ++i)
+		{
+			printf("buffer[%d] = %d\n", i, me->buffer[i]);
+		}
+		for(int i = 0; i< me->head; ++i)
+		{
+			printf("buffer[%d] = %d\n", i, me->buffer[i]);
+		}
+
+	}
+	else
+		printf("%s is empty\n", __FUNCTION__);
+	printf("-----------------------------------\n");
 }
 
 
@@ -79,7 +115,7 @@ queue_t* queue_create(void)
 	if (me != NULL)
 	{
 		queue_init(me, queue_is_full, queue_is_empty, queue_get_size,
-			queue_insert, queue_remove) ;
+			queue_insert, queue_remove, queue_debug) ;
 	}
 	return me;
 }
