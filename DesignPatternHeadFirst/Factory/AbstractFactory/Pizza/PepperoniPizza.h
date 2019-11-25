@@ -8,7 +8,8 @@ class PepperoniPizza : public Pizza
 {
 public:
     PepperoniPizza(PizzaIngredientFactory *factory);
-    void prepare() override;
+    virtual ~PepperoniPizza() override;
+    virtual void prepare() override;
 protected:
     PizzaIngredientFactory *factory;
 };

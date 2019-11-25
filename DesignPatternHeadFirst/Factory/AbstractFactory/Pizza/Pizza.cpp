@@ -18,20 +18,20 @@ std::string Pizza::getName() const
 
 void Pizza::bake() const
 {
-    std::cout << "Bake for 25 minutes at 350";
+    std::cout << "Bake for 25 minutes at 350" << std::endl;
 }
 
 void Pizza::cut() const
 {
-    std::cout << "Cut the pizza into diagonal slices";
+    std::cout << "Cut the pizza into diagonal slices" << std::endl;
 }
 
 void Pizza::box() const
 {
-    std::cout << "Place pizza in official PizzaStore box";
+    std::cout << "Place pizza in official PizzaStore box" << std::endl;
 }
 
 void Pizza::toString() const
 {
-    std::cout << "Print out the pizza spec";
+    std::cout << "Print out the pizza spec" << std::endl;
 }

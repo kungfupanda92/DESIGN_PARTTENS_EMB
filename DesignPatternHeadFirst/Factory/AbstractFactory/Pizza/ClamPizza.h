@@ -9,7 +9,8 @@ class ClamPizza : public Pizza
 {
 public:
     ClamPizza(PizzaIngredientFactory *factory);
-    void prepare() override;
+    virtual ~ClamPizza() override;
+    virtual void prepare() override;
 protected:
     PizzaIngredientFactory *factory;
 };

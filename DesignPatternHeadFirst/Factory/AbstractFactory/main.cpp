@@ -15,6 +15,10 @@ int main()
     Pizza *pizza2 = chicagoStore->orderPizza("cheese");
     std::cout << "Ali ordered a " << pizza2->getName() << std::endl;
 
+
+
+    delete pizza;
+    delete pizza2;
     delete nyStore;
     delete chicagoStore;
     return 0;
